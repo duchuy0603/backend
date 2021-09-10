@@ -45,7 +45,7 @@ export const list = (req, res) => {
         if (err) {
             error: "error"
         } else {
-            res.json({ category });
+            res.json(category );
         }
     })
 }

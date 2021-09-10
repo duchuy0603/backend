@@ -93,7 +93,7 @@ export const list = (req, res) => {
         if (err) {
             error: "k tim thay san pham"
         } else {
-            res.json({ data });
+            res.json( data );
         }
     })
 

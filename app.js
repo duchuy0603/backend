@@ -6,16 +6,22 @@ import mongoose from 'mongoose';
 import productRouter from './router/product';
 import categoriesRouter from './router/category';
 import authen from './router/auth';
+import cartrouter from './router/cart'
 import expressValidator from 'express-validator';
-import cors from 'cors';
-//config
+const cors = require("cors");
+
 const app = express();
 dotenv.config();
 app.use(express.json());
 app.use(expressValidator());
-app.use(cors({
-    origin: 'http://localhost:8080'
-}))
+const corsOptions = {
+    origin: '*',
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+}
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
+//config
 //connect
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -35,6 +41,7 @@ const port = process.env.PORT || 8000;
 
 app.use('/api', productRouter);
 app.use('/api', categoriesRouter);
+app.use('/api', cartrouter);
 // app.use('/api', userRouter);
 app.use('/api', authen);
 
